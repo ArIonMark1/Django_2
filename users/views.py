@@ -1,7 +1,13 @@
+import email
+from django.contrib import auth
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -37,8 +43,34 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(UserCreateView, self).get_context_data(**kwargs)
+        if send_verify_mail(context):
+            print('success sending')
+        else:
+            print('sending failed')
+
         context['title'] = 'GeekShop Registration'
         return context
+
+
+# ===============================================================
+# ====================== verify mail ============================
+
+def verify(request, email, activation_key):
+    user = User.objects.filter(email=email).first()
+    if user:
+        if user.activation_key == activation_key and not user.is_activation_key_expired():
+            user.is_active = True
+            user.save()
+            auth.login(request, user)
+        return render(request, 'verify.html')
+    return HttpResponseRedirect(reverse('index'))
+
+
+def send_verify_mail(user):
+    subject = 'Verify your account'
+    link = reverse('users:verify', args=[user.email, user.activation_key])
+    message = f'{settings.DOMAIN_NAME}{link}'
+    return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
 
 # ===============================================================

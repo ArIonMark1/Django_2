@@ -11,4 +11,5 @@ urlpatterns = [
     path('login/', auth.LoginUsersView.as_view(), name='login'),
     path('profile/<int:pk>', login_required(auth.UserProfileView.as_view()), name='profile'),
     path('logout/', auth.LogoutUserView.as_view(), name='logout'),
+    path('verify/<email>/<activation_key>/', auth.verify, name='verify'),
 ]

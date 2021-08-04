@@ -130,3 +130,18 @@ LOGIN_URL = '/auth/login'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+DOMAIN_NAME = 'http://127.0.0.1:8000/'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'django@gb.local'
+EMAIL_HOST_PASSWORD = 'geekshop'
+EMAIL_USE_SSL = False
+# EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+
+# Варриант лирования сообщений почты в виде файлов вместо отправки
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'

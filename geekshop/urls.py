@@ -23,6 +23,7 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', mainapp.IndexView.as_view(), name='index'),
 
     path('products/', include('mainapp.urls', namespace='products')),

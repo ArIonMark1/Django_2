@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="text-align: center">
+        {% if user.is_authenticated %}
+            <h3>Поздравляем!!!</h3>
+            <div> Пользователь {{ user.email }} теперь работает в цирке вместо льва!!</div>
+        {% else %}
+            <h3>НЕ Поздравляем!</h3>
+            <div>Вам не удалось активировать профиль</div>
+        {% endif %}
+        <a href="{% url 'index' %}" class="btn btn-primary">На главную</a>
+    </div>
+
+{% endblock %}
