@@ -32,7 +32,7 @@ urlpatterns = [
     path('auth/', include('users.urls', namespace='users')),
     path('baskets/', include('baskets.urls', namespace='baskets')),
     path('admin-staff/', include('admins.urls', namespace='admins')),
-    path('order/', include('ordersapp.urls', namespace='order')),
+    path('orders/', include('ordersapp.urls', namespace='ordersapp')),
 
 ]
 if settings.DEBUG:
