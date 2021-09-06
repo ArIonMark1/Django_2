@@ -50,12 +50,24 @@
                         {{ form.password }}
                     </div>
                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="#">Forgot your password?</a>
-                        <input class="btn btn-primary" type="submit" value="LogIn">
+
+
+{#                        <a class="btn btn-outline-dark bi-github" href="{% url 'social:begin' 'github-enterprise' %}">#}
+{#                            Enter with GitHub</a>   not working!!#}
+
+                        <a class="btn btn-outline-dark" href="{% url 'social:begin' 'google-oauth2' %}">
+                            <i class="bi-google"></i>
+                            Google Login
+                        </a>
+{#                        <a class="btn btn-outline-dark" href="{% url 'social:begin' 'vk-oauth2' %}">#}
+{#                            Enter with VK</a>#}
+
+                        <input class="btn btn-outline-dark" type="submit" value="LogIn">
                     </div>
                 </form>
             </div>
             <div class="card-footer text-center">
+                <a class="small" href="#">Forgot your password?</a>
                 <div class="small"><a href="{% url 'users:register' %}">Account required? Try to register!</a></div>
             </div>
         </div>

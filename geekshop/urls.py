@@ -26,12 +26,14 @@ urlpatterns = [
 
     path('', mainapp.IndexView.as_view(), name='index'),
 
+    path('', include('social_django.urls', namespace='social')),
+
     path('products/', include('mainapp.urls', namespace='products')),
     path('auth/', include('users.urls', namespace='users')),
     path('baskets/', include('baskets.urls', namespace='baskets')),
     path('admin-staff/', include('admins.urls', namespace='admins')),
+    path('orders/', include('ordersapp.urls', namespace='ordersapp')),
 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

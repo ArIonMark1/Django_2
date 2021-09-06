@@ -24,26 +24,27 @@
                             </div>
                             <div class="col-lg-4"><strong>{{ basket.sum }} руб.</strong></div>
                             <div class="col-lg-4">
+                                remove
                                 <a href="{% url 'baskets:basket_remove' basket.id %}">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </div>
                     </li>
-                    <div class="buttons" style="display: flex; justify-content: space-between; position: relative;">
-                        <button id="{{ basket.id }}"
-
-                                value="{{ basket.quantity }}"
-                                type="submit"
-                                class="btn btn-success plus"
-                                style="min-width: 49%; font-size: 25px; padding: 0!important;"><b>+</b></button>
-
-                        <button data-id="{{ basket.id }}"
-                                value="{{ basket.quantity }}"
-                                type="submit"
-                                class="btn btn-success minus"
-                                style="min-width: 49%;font-size: 25px; padding: 0!important;"><b>-</b></button>
-                    </div>
+{#                    <div class="buttons" style="display: flex; justify-content: space-between; position: relative;">#}
+{#                        <button id="{{ basket.id }}"#}
+{##}
+{#                                value="{{ basket.quantity }}"#}
+{#                                type="submit"#}
+{#                                class="btn btn-success plus"#}
+{#                                style="min-width: 49%; font-size: 25px; padding: 0!important;"><b>+</b></button>#}
+{##}
+{#                        <button data-id="{{ basket.id }}"#}
+{#                                value="{{ basket.quantity }}"#}
+{#                                type="submit"#}
+{#                                class="btn btn-success minus"#}
+{#                                style="min-width: 49%;font-size: 25px; padding: 0!important;"><b>-</b></button>#}
+{#                    </div>#}
 
                 </ul>
             </div>
@@ -57,7 +58,8 @@
 
             </div>
         </div>
-        <button type="button" class="btn btn-success btn-lg float-right">Оформить</button>
+        <a type="button" class="btn btn-success btn-lg float-right" href="{% url 'ordersapp:orders_list' %}">Оформить</a>
+
         {# ======================================================================================= #}
 
     {% else %}

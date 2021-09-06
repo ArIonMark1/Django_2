@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <div style="text-align: center">
-        {% if user.is_authenticated %}
-            <h3>Поздравляем!!!</h3>
-            <div> Пользователь {{ user.email }} теперь работает в цирке вместо льва!!</div>
-        {% else %}
-            <h3>НЕ Поздравляем!</h3>
-            <div>Вам не удалось активировать профиль</div>
-        {% endif %}
-        <a href="{% url 'index' %}" class="btn btn-primary">На главную</a>
-    </div>
+    <div style="text-align: center; margin-top: 15%">
 
+        {% if user.is_authenticated %}
+            <h3>Congratulations!</h3>
+            <p>User {{ user.email }} is activated!</p>
+        {% else %}
+            <h3>Sorry!</h3>
+            <h6>User not activated, data not correct!!</h6>
+        {% endif %}
+
+        <a class="btn btn-dark" href="{% url 'index' %}">На главную</a>
+    </div>
 {% endblock %}

@@ -1,0 +1,85 @@
+{% extends "ordersapp/base.html" %}
+{% load static %}
+{% load admin_list %}
+
+{% block content %}
+    {% include 'ordersapp/includes/inc_order_summary.html' %}
+    <div class="basket_list row" style="margin-bottom: 10px">
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">img</th>
+                <th scope="col">category</th>
+                <th scope="col">name</th>
+                <th scope="col">price</th>
+                <th scope="col">quantity</th>
+                <th scope="col">total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in object.orderitems.select_related %}
+                <tr>
+                    <th scope="row">{{ item.product.pk }}</th>
+
+                    <td style="width: 20%;">
+                        <img src="{{ item.product.image.url }}"
+                             alt="{{ item.product.short_desc }}" style="width: 100%;">
+                    </td>
+                    <td>
+                        <span class="category_name">
+                           {{ item.product.category.name }}
+                       </span>
+                    </td>
+
+                    <td>
+                        <span class="product_name text-muted h5">{{ item.product.name }}</span>
+                    </td>
+                    <td>
+                        <span class="product_price">
+                           {{ item.product.price }}&nbspруб
+                       </span>
+                    </td>
+                    <td>
+
+                        <span class="product_quantity">
+                           {{ item.quantity }} шт.
+                       </span>
+                    </td>
+                    <td>
+                        <span class="product_cost">
+                            {{ item.get_product_cost }}&nbspруб
+                       </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+
+        {#            {% for item in object.orderitems.select_related %}#}
+        {#                <div class="basket_record">#}
+        {#                    <img src="{{ item.product.image.url }}"#}
+        {#                         alt="{{ item.product.short_desc }}"#}
+        {#                         style="width: 20%; margin: 5px; border: 1px solid greenyellow">#}
+        {#                    <span class="category_name">#}
+        {#                   {{ item.product.category.name }}#}
+        {#               </span>#}
+        {#                    <span class="product_name text-muted">{{ item.product.name }}</span>#}
+        {#                    <span class="product_price">#}
+        {#                   {{ item.product.price }}&nbspруб#}
+        {#               </span>#}
+        {#                    <span class="product_quantitiy">#}
+        {#                   x {{ item.quantity }} шт.#}
+        {#               </span>#}
+        {#                    <span class="product_cost">#}
+        {#                    = {{ item.get_product_cost }}&nbspруб#}
+        {#               </span>#}
+        {#                </div>#}
+        {##}
+        {#            {% endfor %}#}
+    </div>
+
+    {% include 'ordersapp/includes/inc_order_actions.html' %}
+
+{% endblock %}

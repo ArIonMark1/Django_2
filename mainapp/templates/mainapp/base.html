@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 
 <head>
@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!-- Custom styles for this template -->
     {% block css %}
@@ -33,18 +34,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products:index' %}">Catalog <i class="fas fa-shopping-bag"></i>
+                    <a class="nav-link" href="{% url 'products:index' %}">Catalog
+                        <i class="fas fa-shopping-bag"></i>
                     </a>
                 </li>
 
                 {% if user.is_authenticated %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:profile' user.id %}">{{ user.username }}
+                        <a class="nav-link" href="{% url 'users:profile' %}">{{ user.username }}
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </li>
-{# ============================================================================== #}
+                    {# ============================================================================== #}
 
                     {% if user.is_superuser %}
                         <li class="nav-item">
@@ -55,13 +57,22 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">"user"
-                                <i class="fas fa-users-cog"></i>
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-basket3-fill"></i>
+                                <span>
+                                    {% if baskets %}
+                                       ({{ baskets.0.total_quantity }} шт.) {{ baskets.0.total_sum }} руб.
+                                    {% endif %}
+                                </span>
                             </a>
                         </li>
                     {% endif %}
 
-{# ============================================================================== #}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ordersapp:orders_list' %}">Заказы</a>
+                    </li>
+
+                    {# ============================================================================== #}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:logout' %}">LogOut <i
                                 class="fas fa-sign-out-alt"></i></a>
@@ -94,8 +105,8 @@
 
 <!-- FontAwesome script -->
 <script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
-<script src=" {% static 'js/basket.js' %}" ></script>
-<script src=" {% static 'js/actionButton.js'%} " ></script>
+<script src=" {% static 'js/basket.js' %}"></script>
+<script src=" {% static 'js/actionButton.js' %} "></script>
 </body>
 
 </html>
